@@ -1,0 +1,71 @@
+<app-navbar/>
+
+<ion-content class="ion-padding w-100" id="main-content">
+  <ion-card>
+    <ion-card-content>
+      <ion-title class="text-white">Gerenciar Perguntas</ion-title>
+      <ion-card-subtitle class="text-white"
+        >Aqui você pode Adicionar e Remover Perguntas
+        Cadastradas</ion-card-subtitle
+      >
+
+      <ion-item>
+      
+          <ion-label>Selecione a Categoria</ion-label>
+
+        <ion-select [(ngModel)]="catSelecionada">
+          @for (item of categorias; track item) {<ion-select-option
+            value="{{item}}"
+            >{{item}}</ion-select-option
+          >
+          }@empty {
+            <ion-select-option value="Nenhuma Categoria Cadastrada"
+              >Nenhuma Categoria Cadastrada</ion-select-option
+            >
+          }
+        </ion-select>
+        
+      </ion-item>
+
+      <ion-item>
+        @if(perguntas.length > 0){
+        <ion-label>Selecione a Pergunta</ion-label>
+
+        <ion-select [(ngModel)]="selecionada">
+          @for(item of perguntas; track item){
+          <ion-select-option value="{{item.pergunta}}">{{item.pergunta}}</ion-select-option>}
+        </ion-select>
+        }
+      </ion-item>
+      <app-modal></app-modal>
+      @if(selecionada){
+         <ion-button (click)="removerPerguntas(selecionada)">
+        <ion-icon slot="start" name="trash-outline"></ion-icon>Remover Pergunta
+      </ion-button>
+      }
+     
+    </ion-card-content>
+    <ion-card>
+      @if(pergunta !== null  && catSelecionada !== '' ){
+        
+        <ion-card-content>
+          <ion-title class="text-white">Perguntas</ion-title>
+          @for(item of perguntas; track item) {
+            @if(item.categoria === catSelecionada) {
+              <ion-item>
+                <ion-label position="stacked">Pergunta</ion-label>
+                <ion-input [(ngModel)]="pergunta" type="text" disabled>{{item.pergunta}}</ion-input>
+        
+                <ion-label position="stacked">Categoria</ion-label>
+                <ion-input [(ngModel)]="categoria" type="text" disabled>{{item.categoria}}</ion-input>
+        
+                <ion-button color="danger" (click)="removerPerguntas(item.pergunta)">Excluir</ion-button>
+                
+              </ion-item>
+            }
+          }
+        </ion-card-content>
+      }
+    </ion-card>
+  </ion-card>
+</ion-content>

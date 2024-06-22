@@ -1,0 +1,27 @@
+<app-navbar/>
+
+<ion-content class="ion-padding" id="main-content">
+  <ion-card style="max-width: 300px; background-color: white;margin: auto;" class="ion-padding">
+    <ion-card-header class="ion-text-center">
+      <ion-card-title class="ion-text-center">Login</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+
+        <ion-input labelPlacement="stacked" label="Email" placeholder="email@dominio.com" [(ngModel)]="email">
+        </ion-input>
+
+        <ion-input labelPlacement="stacked" label="Senha" placeholder="Senha" type="password" #senhaInput [counter]="true" maxlength="6" minlength="6" [(ngModel)]="senha">
+          <ion-icon slot="start" name="lock-closed-outline"></ion-icon>
+          <ion-button fill="clear" slot="end" aria-label="Mostrar/Esconder" (click)="mudarVisibilidade(senhaInput)">
+            <ion-icon name="{{valor}}" slot="end"></ion-icon>
+          </ion-button>
+        </ion-input>
+      <ion-button expand="block" color="primary" (click)="logar()">Login</ion-button>
+      {{mensagem}}
+      <p>Ainda não tem uma conta? <ion-button expand="block" fill="clear" routerLink="/cadastro" href="/cadastro">Cadastre-se</ion-button></p>
+      <p>Esqueceu sua senha? <ion-button expand="block" fill="clear" routerLink="/recuperar-senha" href="/recuperar-senha">Recuperar senha</ion-button></p>
+
+
+    </ion-card-content>
+  </ion-card>
+</ion-content>
